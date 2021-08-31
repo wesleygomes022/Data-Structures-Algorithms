@@ -12,6 +12,7 @@ public class LinearSearch {
     
     //method optimized
     //it has a minor number of executions compared with the first method
+    //but in this case, the array needs to be ordered so the method can work
     public static int findNum2(int array[], int num){
         for(int i=0; i<array.length; i++){
             if(array[i] == num){
