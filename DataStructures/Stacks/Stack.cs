@@ -15,7 +15,7 @@ namespace TestProj
 
         public void Push(string data)
         {
-            if (Length == 0)
+            if(Length == 0)
             {
                 Top = new Node(data);
                 Length++;
@@ -26,7 +26,6 @@ namespace TestProj
                 Top = new Node(data);
                 Top.Next = temp;
                 Length++;
-
             }
         }
 
@@ -41,13 +40,26 @@ namespace TestProj
             {
                 return null;
             }
+            else
+            {
+                Node temp = Top.Next;
+                Top = temp;
+                Length--;
+                return Peek();                
+            }
+        }
 
-            Node tempTop = Top;
-            Node temp = Top.Next;
-            Top = temp;
-            tempTop = null;
-            Length--;
-            return Peek();
+        public void ListStack(Node top)
+        {
+            if(top.Next == null)
+            {
+                Console.WriteLine(top.Data);
+            }
+            else
+            {
+                ListStack(top.Next);
+                Console.WriteLine(top.Data);
+            }
         }
     }
 }
