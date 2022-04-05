@@ -15,22 +15,21 @@ namespace BufferCircular
             Q.insert(50);
 
             Q.printQueue();
-
+            
             Console.WriteLine();
             Q.delete();
             Q.delete();
-
+            
             Console.WriteLine();
             Q.printQueue();
-
+            
             Q.insert(60);
-
             Console.WriteLine();
             Q.printQueue();
-
+            
             Console.WriteLine();
             Q.insert(70);           
-
+            
             Console.WriteLine();
             Q.printQueue();
             Console.WriteLine();

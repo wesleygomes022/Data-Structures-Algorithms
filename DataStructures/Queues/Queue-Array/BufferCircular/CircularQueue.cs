@@ -8,7 +8,6 @@ namespace BufferCircular
         private int Front;
         private int Rear;
         private int Max;
-        private int Count;
 
         public CircularQueue(int size)
         {
@@ -16,12 +15,11 @@ namespace BufferCircular
             Front = 0;
             Rear = -1;
             Max = size;
-            Count = 0;
         }
 
         public void insert(int item)
         {
-            if (Count == Max)
+            if (QtdElem() >= Max)
             {
                 Console.WriteLine("Queue Overflow");
                 return;
@@ -30,14 +28,12 @@ namespace BufferCircular
             {
                 Rear = (Rear + 1) % Max;
                 Ele[Rear] = item;
-
-                Count++;
             }
         }
 
         public void delete()
         {
-            if (Count == 0)
+            if (QtdElem() == 0)
             {
                 Console.WriteLine("Queue is Empty");
             }
@@ -47,14 +43,12 @@ namespace BufferCircular
 
                 Ele[Front] = 0;
                 Front = (Front + 1) % Max;
-
-                Count--;
             }
         }
 
         public void printQueue()
         {
-            if (Count == 0)
+            if (QtdElem() == 0)
             {
                 Console.WriteLine("Queue is Empty");
                 return;
@@ -65,6 +59,18 @@ namespace BufferCircular
                 {
                     Console.WriteLine($"Item[{i}]: {Ele[i]}");
                 }
+            }
+        }
+
+        public int QtdElem()
+        {
+            if (Rear >= Front || Rear == -1)
+            {
+                return Rear - Front + 1;
+            }
+            else
+            {
+                return (Max - Front) + Rear + 1; 
             }
         }
     }
