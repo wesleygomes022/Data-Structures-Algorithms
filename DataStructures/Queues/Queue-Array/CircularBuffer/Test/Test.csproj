@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BufferCircular\BufferCircular.csproj" />
+    <ProjectReference Include="..\CircularBuffer\CircularBuffer.csproj" />
   </ItemGroup>
 
 </Project>

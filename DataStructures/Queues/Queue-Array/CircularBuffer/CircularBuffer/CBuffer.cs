@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace BufferCircular
+namespace CircularBuffer
 {
-    public class CircularQueue
+    public class CBuffer
     {
         private int[] Ele;
         private int First;
         private int Last;
         private int Max;
 
-        public CircularQueue(int size)
+        public CBuffer(int size)
         {
             Ele = new int[size];
             First = -1;
@@ -29,12 +29,17 @@ namespace BufferCircular
                 if (First == -1)
                 {
                     First = 0;
-                    Ele[Last+1] = item;
+                    Ele[Last + 1] = item;
+                    Last = (Last + 1) % Max;
+                }
+                else if(Last == Max-1)
+                {
+                    Ele[0] = item;
                     Last = (Last + 1) % Max;
                 }
                 else
                 {
-                    Ele[Last+1] = item;
+                    Ele[Last + 1] = item;
                     Last = (Last + 1) % Max;
                 }
             }
@@ -60,7 +65,6 @@ namespace BufferCircular
             }
 
             return temp;
-
         }
 
         public void printQueue()
@@ -93,6 +97,11 @@ namespace BufferCircular
             {
                 return (Max - First) + Last + 1;
             }
+        }
+
+        public int FirsEle()
+        {
+            return Ele[First];
         }
     }
 }
