@@ -21,27 +21,19 @@ namespace CircularBuffer
         {
             if (QtdElem() >= Max)
             {
-                Console.WriteLine("Queue Overflow");
-                return;
+                throw new InvalidOperationException("Queue overflow.");
             }
             else
             {
                 if (First == -1)
                 {
-                    First = 0;
-                    Ele[Last + 1] = item;
-                    Last = (Last + 1) % Max;
-                }
-                else if(Last == Max-1)
-                {
-                    Ele[0] = item;
-                    Last = (Last + 1) % Max;
-                }
+                    First = Last = 0;
+                }                
                 else
                 {
-                    Ele[Last + 1] = item;
-                    Last = (Last + 1) % Max;
+                    Last = (Last + 1) % Max;                                        
                 }
+                Ele[Last] = item;
             }
         }
 
@@ -50,7 +42,7 @@ namespace CircularBuffer
             int q = QtdElem();
             if (q == 0)
             {
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Empty queue.");
             }
 
             int temp = Ele[First];

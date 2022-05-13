@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using CircularBuffer;
+using System;
 
 namespace Test
 {
@@ -17,21 +18,12 @@ namespace Test
             Q.Queue(10);
             Q.Queue(20);
 
-            if (Q.DeQueue() != 10)
-            {
-                Assert.Fail();
-            }
-            if (Q.DeQueue() != 20)
-            {
-                Assert.Fail();
-            }
+            Assert.AreEqual(Q.DeQueue(), 10);
+            Assert.AreEqual(Q.DeQueue(), 20);
 
             Q.Queue(30);
             Q.Queue(40);
-            if (Q.QtdElem() == 2)
-                Assert.Pass();
-            else
-                Assert.Fail();
+            Assert.AreEqual(Q.QtdElem(), 2);
         }
 
         [Test]
@@ -43,14 +35,7 @@ namespace Test
             Q.DeQueue();
             Q.DeQueue();
 
-            if (Q.QtdElem() == 0)
-            {
-                Assert.Pass();
-            }
-            else
-            {
-                Assert.Fail();
-            }
+            Assert.AreEqual(Q.QtdElem(), 0);
         }
 
         [Test]
@@ -62,15 +47,8 @@ namespace Test
             Q.DeQueue();
             Q.Queue(30);
 
-            if (Q.QtdElem() != 2)
-            {
-                Assert.Fail();
-            }
-            else if (Q.FirsEle() != 20)
-            {
-                Assert.Fail();
-            }
-            else { Assert.Pass(); }
+            Assert.AreEqual(Q.QtdElem(), 2);
+            Assert.AreEqual(Q.FirsEle(), 20);            
         }
 
         [Test]
@@ -92,12 +70,28 @@ namespace Test
             Q.DeQueue();
             Q.DeQueue();
             Q.Queue(110);
+            Q.Queue(120);
 
-            if (Q.DeQueue() != 50)
-            {
-                Assert.Fail();
-            }
-            else { Assert.Pass(); }
+            Assert.AreEqual(Q.QtdElem(), 8);
+            Assert.AreEqual(Q.DeQueue(), 50);           
         }
+
+        [Test]
+        public void FullQueue()
+        {
+            CBuffer q = new CBuffer(3);
+            q.Queue(10);
+            q.Queue(20);
+            q.Queue(30);
+            
+            Assert.Throws<InvalidOperationException>(()=> q.Queue(40));
+        }
+
+        [Test]
+        public void EmptyQueue()
+        {
+            CBuffer q = new CBuffer(10);
+
+            Assert.Throws<InvalidOperationException>(() => q.DeQueue());        }
     }
 }
