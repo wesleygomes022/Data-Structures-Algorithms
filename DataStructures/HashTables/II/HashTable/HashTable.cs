@@ -26,34 +26,32 @@ namespace HashTable
         }
 
         public void Add(string key, string value)
-        {
-            Data kv = new Data(key, value);
-            int hash = Hash(key);
+        {          
             if (ContainsKey(key))
             {
                 throw new InvalidOperationException("Key already exists.");
             }
-            else if(_arr[hash] == null)
+
+            Data kv = new Data(key, value);
+            int hash = Hash(key);
+
+            if (_arr[hash] == null)
             {
                 _arr[hash] = new LinkedList<Data>();
-                _arr[hash].AddLast(kv);
-                Count++;
             }
-            else
-            {
-                _arr[hash].AddLast(kv);
-                Count++;
-            }            
+
+            _arr[hash].AddLast(kv);
+            Count++;
         }
 
         public bool ContainsKey(string key)
         {
             int hash = Hash(key);
-            if (_arr[hash] == null) return false;
+            if (_arr[hash] == null || _arr[hash].Count == 0) return false;
 
             foreach (Data el in _arr[hash])
             {
-                if (el.Equals(key))
+                if (el.Key == key)
                 {
                     return true;
                 }
@@ -61,19 +59,24 @@ namespace HashTable
             return false;
         }
 
-        public string Remove(string key)
+        public void Remove(string key)
         {
             int hash = Hash(key);
             if (_arr[hash] == null) throw new InvalidOperationException("Key doesn't exists.");
 
             foreach (Data el in _arr[hash])
             {
-                if (el.Equals(key))
+                if (el.Key == key)
                 {
-                    string temp = el.Key;
                     _arr[hash].Remove(el);
                     Count--;
-                    return temp;
+
+                    /*if(_arr[hash].Count == 0)
+                    {
+                        _arr[hash] = null;
+                    }*/
+
+                    break;
                 }
             }
 
@@ -84,11 +87,11 @@ namespace HashTable
         {
             int hash = Hash(key);
 
-            if (_arr[hash] != null)
+            if (_arr[hash] != null && _arr[hash].Count > 0)
             {
                 foreach (Data el in _arr[hash])
                 {
-                    if(el.Equals(key))
+                    if (el.Key == key)
                     {
                         return el.Value;
                     }

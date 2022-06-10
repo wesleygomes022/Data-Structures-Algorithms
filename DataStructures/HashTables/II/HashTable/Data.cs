@@ -12,17 +12,7 @@ namespace HashTable
         {
             Key = key;
             Value = value;
-        }
+        }      
 
-        public override bool Equals(object obj)
-        {
-            string key = obj as string;
-            return Key.Equals(key);
-        }
-
-        public override int GetHashCode()
-        {
-            return Key.GetHashCode();
-        }
     }
 }
