@@ -84,12 +84,9 @@ namespace BinaryTree
             return minv;
         }
 
-        public bool Remove(int value)
+        public void Remove(int value)
         {
-
             Root = Remove(Root, value);
-            return Root != null;
-
         }
 
         private Node Remove(Node parent, int key)
