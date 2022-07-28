@@ -111,23 +111,5 @@ namespace TEST_BinaryTree
 
             Assert.True(temp);
         }
-
-        /*[Test]
-        public void Remove4()
-        {
-            BinarySearchTree bst = new BinarySearchTree(80);
-            bst.Insert(66);
-            bst.Insert(83);
-            bst.Insert(81);
-            bst.Insert(82);
-            bst.Insert(99);
-            bst.Insert(95);
-            bst.Insert(87);
-            bst.Insert(84);
-
-            var temp = bst.Remove(100);
-
-            Assert.IsFalse(temp);
-        }*/
     }
 }
